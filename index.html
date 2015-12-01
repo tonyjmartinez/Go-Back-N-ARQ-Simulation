@@ -40,6 +40,14 @@ $(document).ready(function(){
 		
 	});//END DAMAGED FRAME RESEND
 	
+	$("input:nth-child(3)").click(function(){//DAMAGED FRAME P BIT
+		packetCycle(5,1);
+		moveWindow(6);
+		setTimeout(function(){
+		$(paras[5]).animate({top: '+=400',opacity:'0'},6000);
+		},5000);
+	});
+	
 	//Moves packet x at timeout y
 	function movePackets(x,y){
 	setTimeout(function(){
@@ -76,6 +84,8 @@ $(document).ready(function(){
 
 <input id="1a" type = "submit" style="position:absolute; left:150px;" value = "Damaged Frame => Resend"/> 
 
+<input id="1b" type = "submit" style="position:absolute; left:400px;" value = "Damaged Frame => Resend"/> 
+
 <div class="packet">1</div>
 <div class="packet" style="left:100px;">2</div>
 <div class="packet" style="left:200px;">3</div>
@@ -91,6 +101,8 @@ $(document).ready(function(){
 <div class="packet" style="left:1200px;">13</div>
 <div class="packet" style="left:1300px;">14</div>
 <div class="window"></div>
+<div class="pbit">PBIT</div>
+<div class="rr"></div>
 
 </body>
 </html>
