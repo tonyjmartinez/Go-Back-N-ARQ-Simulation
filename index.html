@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<script> 
+$(document).ready(function(){
+	var paras = $('div'),
+    i = 0;
+	
+    $("input:nth-child(1)").click(function(){//NO ERRORS
+			packetCycle(11,1);
+			moveWindow(12);
+
+	});//END NO ERRORS
+	
+	$("input:nth-child(2)").click(function(){//DAMAGED FRAME RESEND
+		packetCycle(5,1);
+		moveWindow(6);
+		setTimeout(function(){
+		$(paras[5]).animate({top: '+=400',opacity:'0'},6000);
+		},5000);
+		movePackets(6,6000);
+		movePackets(7,7000);
+		movePackets(8,8000);
+		movePackets(9,9000);
+		setTimeout(function(){
+			$(paras[5]).animate({top:'-=400',opacity:'1'},0);
+			for(i=6; i < 11; i++){
+			$(paras[i]).animate({opacity:'1'},0);
+			}
+		},10000);
+		setTimeout(function(){
+		packetCycle(14,6);
+		},10500);
+		setTimeout(function(){
+			moveWindow(6);
+		},15500);
+		
+		
+	});//END DAMAGED FRAME RESEND
+	
+	//Moves packet x at timeout y
+	function movePackets(x,y){
+	setTimeout(function(){
+		$(paras[x]).animate({top:30},10);
+		$(paras[x]).animate({top: '+=800'},2000);
+		$(paras[x]).animate({top: '-=790',opacity:'0.5'});
+		},y);
+	}
+	
+	//moves the window *moves* times
+	function moveWindow(moves){
+		for(i=0; i<moves;i++){
+			if(i!=0){
+			setTimeout(function(){
+				$('.window').animate({left: '+=97'})
+			},1500+i*1000);
+			}
+		}
+	}
+	
+	//moves packets numbered from start to cycles
+	function packetCycle(cycles,start){
+		for (z = start-1; z < cycles; z++){
+			movePackets(z,z*1000);
+		}
+	}
+});
+</script> 
+</head>
+<body>
+
+
+<input id="no_errors" type = "submit" style="position:absolute; left:5px;" value = "No Errors"/> 
+
+<input id="1a" type = "submit" style="position:absolute; left:150px;" value = "Damaged Frame => Resend"/> 
+
+<div class="packet">1</div>
+<div class="packet" style="left:100px;">2</div>
+<div class="packet" style="left:200px;">3</div>
+<div class="packet" style="left:300px;">4</div>
+<div class="packet" style="left:400px;">5</div>
+<div class="packet" style="left:500px;">6</div>
+<div class="packet" style="left:600px;">7</div>
+<div class="packet" style="left:700px;">8</div>
+<div class="packet" style="left:800px;">9</div>
+<div class="packet" style="left:900px;">10</div>
+<div class="packet" style="left:1000px;">11</div>
+<div class="packet" style="left:1100px;">12</div>
+<div class="packet" style="left:1200px;">13</div>
+<div class="packet" style="left:1300px;">14</div>
+<div class="window"></div>
+
+</body>
+</html>
